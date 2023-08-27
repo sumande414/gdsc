@@ -14,7 +14,11 @@ class _HomePageState extends State<HomePage> {
   Future<Conference> apicall() async {
     http.Response response =
         await http.get(Uri.parse("https://gdscdev.vercel.app/api"));
-    return Conference.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
+      return Conference.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception("Could not load data.");
+    }
   }
 
   late Future<Conference> conference;
@@ -30,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       future: conference,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          var info= snapshot.data!.data;
+          var info = snapshot.data!.data;
           return ListView.builder(
               itemCount: info.length,
               itemBuilder: (BuildContext context, int index) {
@@ -49,8 +53,7 @@ class _HomePageState extends State<HomePage> {
                                 info[index].dateTime,
                                 info[index].venue,
                                 info[index].city,
-                                info[index].country
-                                );
+                                info[index].country);
                           });
                     },
                     child: Card(
@@ -68,7 +71,12 @@ class _HomePageState extends State<HomePage> {
                 );
               });
         } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
+          return const Center(
+              child: Text(
+            "There seems to be a problem with network. Check your network connection.",
+            style: TextStyle(color: Colors.red),
+            textAlign: TextAlign.center,
+          ));
         }
 
         return const Center(child: CircularProgressIndicator());
