@@ -1,4 +1,4 @@
-# gdsc
+# gdsc - Task
 
 This is a project built by flutter framework.
 To build this project from source code follow the following instruction:
