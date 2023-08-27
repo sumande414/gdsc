@@ -12,26 +12,27 @@ class ShowBottomBar extends StatelessWidget {
   final String city;
   final String country;
 
-  const ShowBottomBar(this.title,this.description, this.organiser, this.organiserIcon,
-      this.dateTime, this.venue, this.city, this.country,
+  const ShowBottomBar(this.title, this.description, this.organiser,
+      this.organiserIcon, this.dateTime, this.venue, this.city, this.country,
       {super.key});
 
   Widget displayImage(String location) {
-    if (location.split(".").last == "svg")
+    if (location.split(".").last == "svg") {
       return SvgPicture.network(location);
-    else
+    } else {
       return Image.network(location);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(children: [
-        Center(child: Text(title,
-        style: const TextStyle(
-          fontWeight: FontWeight.w900,
-          fontSize: 25
-        ),)),
+        Center(
+            child: Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
+        )),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
@@ -63,7 +64,7 @@ class ShowBottomBar extends StatelessWidget {
               )),
         ),
         Text("Date : ${DateFormat("dd-MM-yyyy").format(dateTime.toLocal())}",
-            style: TextStyle(fontSize: 14)),
+            style: const TextStyle(fontSize: 14)),
         Text(
             "Time : ${DateFormat("HH:mm").format(dateTime.toLocal())} Local Time",
             style: const TextStyle(fontSize: 14)),
