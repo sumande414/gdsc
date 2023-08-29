@@ -105,7 +105,7 @@ class ConferencePage extends StatelessWidget {
                               );
                             },
                             icon: const Icon(Icons.calendar_month_rounded),
-                            label: Text("Open Calendar"))
+                            label: const Text("Open Calendar"))
                       ],
                     ),
                   ),
@@ -126,7 +126,7 @@ class ConferencePage extends StatelessWidget {
                             "Venue : $venue, $city, $country",
                             textAlign: TextAlign.center,
                           )),
-                      Spacer(),
+                      const Spacer(),
                       FilledButton.icon(
                           onPressed: () async {
                               await LaunchApp.openApp(
@@ -135,7 +135,7 @@ class ConferencePage extends StatelessWidget {
                               );
                             },
                           icon: const Icon(Icons.location_on_outlined),
-                          label: Text("Open Google Maps"))
+                          label: const Text("Open Google Maps"))
                     ],
                   ),
                 )),
