@@ -26,12 +26,7 @@ class MainApp extends StatelessWidget {
             colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
             useMaterial3: true),
         title: "Conferences",
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Conferences"),
-          ),
-          body: const HomePage(),
-        ),
+        home: const HomePage(),
       );
     });
   }
