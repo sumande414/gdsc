@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Conferences"),
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           actions: [
             FutureBuilder<Conference>(
                 future: conference,
