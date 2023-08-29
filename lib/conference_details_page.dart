@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 
 class ConferencePage extends StatelessWidget {
   final String title;
@@ -35,8 +36,7 @@ class ConferencePage extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
-                
-                    child: Column(children: [
+                child: Column(children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
@@ -85,17 +85,26 @@ class ConferencePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                              "Date : ${DateFormat("dd-MM-yyyy").format(dateTime.toLocal())}",
-                              style: const TextStyle(fontSize: 14,),),
+                            "Date : ${DateFormat("dd-MM-yyyy").format(dateTime.toLocal())}",
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
                           Text(
                               "Time : ${DateFormat("HH:mm").format(dateTime.toLocal())} Local Time",
                               style: const TextStyle(fontSize: 14)),
-                              
-                              
                         ],
                       ),
                       const Spacer(),
-                      FilledButton.icon(onPressed: (){}, icon: const Icon(Icons.calendar_month_rounded), label: Text("Add to Calender"))
+                      FilledButton.icon(
+                          onPressed: () async {
+                            await LaunchApp.openApp(
+                              androidPackageName: 'com.google.android.calendar',
+                              // openStore: false
+                            );
+                          },
+                          icon: const Icon(Icons.calendar_month_rounded),
+                          label: Text("Open Calendar"))
                     ],
                   ),
                 ),
@@ -103,15 +112,29 @@ class ConferencePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Card(child: Padding(
+              child: Card(
+                  child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(height:70,width:210,child: Text("Venue : $venue, $city, $country",textAlign: TextAlign.center,)),
+                    Container(
+                        height: 70,
+                        width: 170,
+                        child: Text(
+                          "Venue : $venue, $city, $country",
+                          textAlign: TextAlign.center,
+                        )),
                     Spacer(),
-                    FilledButton.icon(onPressed: (){}, icon: const Icon(Icons.location_on_outlined), label: Text("Go to Maps"))
-
+                    FilledButton.icon(
+                        onPressed: () async {
+                            await LaunchApp.openApp(
+                              androidPackageName: 'com.google.android.apps.maps',
+                              // openStore: false
+                            );
+                          },
+                        icon: const Icon(Icons.location_on_outlined),
+                        label: Text("Open Google Maps"))
                   ],
                 ),
               )),
