@@ -16,7 +16,15 @@ I. To build this project from source code follow the following instruction:
 II. To view the source code, go to the lib folder. ("gdsc/lib")
 
 The folder contains 4 files:-
-1. main.dart -> Starting point of the app. Contains the Scaffold and Theme Data
-2. home_page.dart -> Contains the home_page layout. The cards are built here. The api is called in this file. And the objects are displayed using FutureBuilder() and ListView.builder() functions.
-3. bottom_bar.dart -> Contains the layout of the bottomModalSheet widget.
+1. main.dart -> Starting point of the app. Contains the Theme Data.
+
+2. home_page.dart -> Contains the home_page layout. The cards are built here. The api is called in this file. And the objects are displayed using.
+FutureBuilder() and ListView.builder() functions.
+
+3. conference_details_page.dart -> Contains the description, date, time and venue within a new Scaffold().
+
 4. model.dart -> Contains a model class which acts as a blueprint for the data supplied by the api.
+
+5. search_bar.dart -> contains the search logic.
+
+6. cards.dart -> Contains the card widget properties to display the banner and the title.
