@@ -58,7 +58,7 @@ class ShowBottomBar extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                       height: 50, width: 50, child: displayImage(organiserIcon))
                 ],
               )),
