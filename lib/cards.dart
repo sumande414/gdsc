@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'model.dart';
-import 'bottom_bar.dart';
+import 'conference_details_page.dart';
 
 class Cards extends StatelessWidget {
   final List<Data> info;
@@ -12,10 +12,10 @@ class Cards extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (ctx) {
-                return ShowBottomBar(
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConferencePage(
                     info[index].title,
                     info[index].description,
                     info[index].organiser,
@@ -23,8 +23,8 @@ class Cards extends StatelessWidget {
                     info[index].dateTime,
                     info[index].venue,
                     info[index].city,
-                    info[index].country);
-              });
+                    info[index].country)),
+          );
         },
         child: Card(
             child: Column(
