@@ -32,116 +32,118 @@ class ConferencePage extends StatelessWidget {
         title: Text(title),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
-      body: Column(children: [
-        Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-                child: Column(children: [
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                  child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    description,
+                    textAlign: TextAlign.justify,
+                    style: const TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Organiser: ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w800, fontSize: 16),
+                          ),
+                          Text(organiser, style: const TextStyle(fontSize: 14)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: displayImage(organiserIcon))
+                        ],
+                      )),
+                ),
+              ]))),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  description,
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(
-                    fontSize: 17,
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Date : ${DateFormat("dd-MM-yyyy").format(dateTime.toLocal())}",
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                                "Time : ${DateFormat("HH:mm").format(dateTime.toLocal())} Local Time",
+                                style: const TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                        const Spacer(),
+                        FilledButton.icon(
+                            onPressed: () async {
+                              await LaunchApp.openApp(
+                                androidPackageName: 'com.google.android.calendar',
+                                // openStore: false
+                              );
+                            },
+                            icon: const Icon(Icons.calendar_month_rounded),
+                            label: Text("Open Calendar"))
+                      ],
+                    ),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Organiser: ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 16),
-                        ),
-                        Text(organiser, style: const TextStyle(fontSize: 14)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                            height: 50,
-                            width: 50,
-                            child: displayImage(organiserIcon))
-                      ],
-                    )),
-              ),
-            ]))),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                    child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Date : ${DateFormat("dd-MM-yyyy").format(dateTime.toLocal())}",
-                            style: const TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                              "Time : ${DateFormat("HH:mm").format(dateTime.toLocal())} Local Time",
-                              style: const TextStyle(fontSize: 14)),
-                        ],
-                      ),
-                      const Spacer(),
+                      Container(
+                          height: 70,
+                          width: 170,
+                          child: Text(
+                            "Venue : $venue, $city, $country",
+                            textAlign: TextAlign.center,
+                          )),
+                      Spacer(),
                       FilledButton.icon(
                           onPressed: () async {
-                            await LaunchApp.openApp(
-                              androidPackageName: 'com.google.android.calendar',
-                              // openStore: false
-                            );
-                          },
-                          icon: const Icon(Icons.calendar_month_rounded),
-                          label: Text("Open Calendar"))
+                              await LaunchApp.openApp(
+                                androidPackageName: 'com.google.android.apps.maps',
+                                // openStore: false
+                              );
+                            },
+                          icon: const Icon(Icons.location_on_outlined),
+                          label: Text("Open Google Maps"))
                     ],
                   ),
-                ),
+                )),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                        height: 70,
-                        width: 170,
-                        child: Text(
-                          "Venue : $venue, $city, $country",
-                          textAlign: TextAlign.center,
-                        )),
-                    Spacer(),
-                    FilledButton.icon(
-                        onPressed: () async {
-                            await LaunchApp.openApp(
-                              androidPackageName: 'com.google.android.apps.maps',
-                              // openStore: false
-                            );
-                          },
-                        icon: const Icon(Icons.location_on_outlined),
-                        label: Text("Open Google Maps"))
-                  ],
-                ),
-              )),
-            ),
-          ],
-        )
-      ]),
+            ],
+          )
+        ]),
+      ),
     );
   }
 }
